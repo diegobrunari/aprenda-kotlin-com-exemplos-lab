@@ -35,7 +35,7 @@ fun main() {
     	Nivel.INTERMEDIARIO, 							      
 															 //passando nível da formação
     	mutableListOf( 										  
-    		ConteudoEducacional("Introdução ao Kotlin"),
+    	    ConteudoEducacional("Introdução ao Kotlin"),
             ConteudoEducacional("POO - Kotlin"),
             ConteudoEducacional("Exceptions - Kotlin")
 															 //utilizando a mutablelist para criar mais de um conteudo
