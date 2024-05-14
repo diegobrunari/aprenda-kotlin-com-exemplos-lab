@@ -1,21 +1,58 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
-
 enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
 
-class Usuario
+class Usuario(
+    val firstName: String, 
+    val lastName: String, 
+    val formacao: Formacao
+)
 
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
+															 // definindo o que a classe de Usuario deve receber.
 
-data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
+data class ConteudoEducacional(val nome: String, val duracao: Int = 60)
 
+															 //apenas ajuste de var para val.
+
+data class Formacao(val nome: String, val nivel: Nivel, val conteudos: MutableList<ConteudoEducacional>) {
+															 //ajuste de var para val && conteudo educacional para MutableList para que permitisse adicionar conteudo
     val inscritos = mutableListOf<Usuario>()
     
-    fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+    fun matricular(vararg usuario: Usuario) {
+        inscritos.addAll(usuario)
     }
+															 //utilizando a lista mutável de inscritos para add um novo usuario
+    
+        fun adicionarConteudo(conteudo: ConteudoEducacional) {
+        conteudos.add(conteudo)
+    }
+															  //criada função para adicionar novos conteudos para a formação
+        
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    val formacao = Formacao(
+    	"Formação Back End em Kotlin", 						  
+															 //passando nome da formação
+    	Nivel.INTERMEDIARIO, 							      
+															 //passando nível da formação
+    	mutableListOf( 										  
+    		ConteudoEducacional("Introdução ao Kotlin"),
+            ConteudoEducacional("POO - Kotlin"),
+            ConteudoEducacional("Exceptions - Kotlin")
+															 //utilizando a mutablelist para criar mais de um conteudo
+    	)
+    )
+    
+    val usuario = arrayOf(
+        Usuario("Diego", "Brunari", formacao),
+        Usuario("Maria", "Luiza", formacao)
+    )       												    
+															 //criando um novo usuario e setando a formação criada acima
+    
+    formacao.matricular(*usuario)                               
+															 //adicionando novo usuario na variavel da lista de inscritos
+    
+
+    formacao.inscritos.forEach { usuario -> print("${usuario.firstName} ${usuario.lastName} | ") }; println("foram cadastrados com sucesso!")
+    println("Os conteúdos do curso ${formacao.nome} são: ")
+    formacao.conteudos.forEach { println(it.nome) }
 }
