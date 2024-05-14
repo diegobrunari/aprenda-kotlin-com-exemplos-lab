@@ -20,9 +20,9 @@ data class Formacao(val nome: String, val nivel: Nivel, val conteudos: MutableLi
         inscritos.addAll(usuario)
     }
 															 //utilizando a lista mutável de inscritos para add um novo usuario
-    
-        fun adicionarConteudo(conteudo: ConteudoEducacional) {
-        conteudos.add(conteudo)
+
+    fun adicionarConteudo(conteudo: ConteudoEducacional) {
+    conteudos.add(conteudo)
     }
 															  //criada função para adicionar novos conteudos para a formação
         
